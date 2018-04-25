@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- include css in the header -->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/plotly-latest.min.js}"></script>
+
+    <title>Plotly.toyhouse.cc</title>
+</head>
+<body>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="classifica"></div>
+<p>Update: <span id="update"></span></p>
+<script type="text/javascript">
+    //<![CDATA[
+    var url='http://softeng.polito.it/courses/VIQ/datasets/classifica20160310.json';
+
+
+    Plotly.d3.json(url, function(error, json) {
+        if (error) return  console.warn(error);
+
+        var squadre=[];
+        var punti=[];
+        for(var i=0; i<json.data.length; ++i){
+            squadre.push(json.data[i][0]);
+            punti.push(+json.data[i][1]);
+        }
+
+        var cols = [], txt=[];
+        cols.length=20; txt.length=20;
+        cols.fill("gray",0,20);
+        cols[0] = "dodgerblue";
+        txt[0] = "Qualificata Champions League";
+        cols[1] = "dodgerblue";
+        txt[1] = "Qualificata Champions League";
+        cols[2] = "green";
+        txt[2] = "Qualificata Preliminari Champions";
+        cols[3] = "gold";
+        txt[3] = "Qualificata Europa League";
+        cols[4] = "gold";
+        txt[4] = "Qualificata Europa League";
+        cols[18] = "red";
+        txt[18] = "Retrocessa in Serie B";
+        cols[19] = "red";
+        txt[19] = "Retrocessa in Serie B";
+
+
+        var tracce = [{
+            y : squadre.reverse(),
+            x : punti.reverse(),
+            type:"bar",
+            orientation : "h",
+            text : txt.reverse(),
+            marker : {
+                color: cols.reverse()
+            }
+        }];
+        var layout = { title:"Classifica",
+            margin: {
+                l: 100, r:180, b: 60, t:60
+            },
+            width:700,
+            height:500,
+            xaxis:{title:"Punti"}
+        };
+
+        document.getElementById("update").innerHTML = json.update;
+        Plotly.newPlot('classifica', tracce, layout);
+    });
+
+    //]]>
+</script>
+
+</body>
+</html>

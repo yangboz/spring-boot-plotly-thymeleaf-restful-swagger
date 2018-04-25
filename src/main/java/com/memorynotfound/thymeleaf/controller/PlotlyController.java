@@ -23,7 +23,7 @@ public class PlotlyController {
     }
 
     private List<String> plotlyExamples = new ArrayList<String>(
-            Arrays.asList("3d-surface-plots", "3d-mesh-plots", "3d-scatter-plots"));
+            Arrays.asList("2d-category-plots","2d-timeseries-plots","3d-surface-plots", "3d-mesh-plots", "3d-scatter-plots"));
 
     @RequestMapping(value = "/example/{index}", method = GET)
     public String listOne(@PathVariable int index) {
