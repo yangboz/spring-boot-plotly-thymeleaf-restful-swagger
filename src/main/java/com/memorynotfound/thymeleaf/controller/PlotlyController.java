@@ -4,6 +4,7 @@ import com.memorynotfound.thymeleaf.model.PlotlyData;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -34,13 +35,21 @@ public class PlotlyController {
     @ResponseStatus(OK)
     @RequestMapping(value = "/plotly/{id}", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the /plotly/{id} is successfully created or not.", notes = "e.g. json: jsonString,index: 1")
-    public void plotlyOne(@RequestBody @Valid PlotlyData plotlyData, @PathVariable int index) {
+    public String plotlyOne(@RequestBody @Valid PlotlyData plotlyData, @PathVariable int index) {
+        //
 
+        //
+        return plotlyExamples.get(index);
     }
 
-    @RequestMapping(value = "/plotly/{count}", method = GET)
-    @ApiOperation(httpMethod = "GET", value = "Response a string describing if the /plotly is successfully created or not.", notes ="")
-    public List<Object> plotlyList(@PathVariable int count) {
-        return null;
+    @RequestMapping(value = "/plotly/{index}", method = GET)
+    @ApiOperation(httpMethod = "GET", value = "Response a string describing plotly templates successfully created or not.", notes ="")
+    public ModelAndView plotlyListAll(@PathVariable int index,@RequestParam("dataUrl") String dataUrl) {
+//        return plotlyExamples.get(index);
+        // return a model and a view (just as an example)
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("dataUrl", dataUrl);
+        mv.setViewName(plotlyExamples.get(index));
+        return mv;
     }
 }

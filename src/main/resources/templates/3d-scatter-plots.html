@@ -18,7 +18,7 @@
 <div id="myDiv"></div>
 <script type="text/javascript">
     //<![CDATA[
-    Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/3d-scatter.csv', function(err, rows){
+    Plotly.d3.csv('/js/3d-scatter.csv', function(err, rows){
         function unpack(rows, key) {
             return rows.map(function(row)
             { return row[key]; });}
