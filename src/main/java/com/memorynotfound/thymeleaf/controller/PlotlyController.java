@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -20,12 +22,19 @@ public class PlotlyController {
         return "home";
     }
 
+    private List<String> plotlyExamples = new ArrayList<String>(
+            Arrays.asList("3d-surface-plots", "3d-mesh-plots", "3d-scatter-plots"));
+
+    @RequestMapping(value = "/example/{index}", method = GET)
+    public String listOne(@PathVariable int index) {
+        return plotlyExamples.get(index);
+    }
+
 
     @ResponseStatus(OK)
     @RequestMapping(value = "/plotly/{id}", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the /plotly/{id} is successfully created or not.", notes = "e.g. json: jsonString,index: 1")
-    public void sell(@RequestBody @Valid PlotlyData plotlyData, @PathVariable int index) {
-
+    public void plotlyOne(@RequestBody @Valid PlotlyData plotlyData, @PathVariable int index) {
 
     }
 

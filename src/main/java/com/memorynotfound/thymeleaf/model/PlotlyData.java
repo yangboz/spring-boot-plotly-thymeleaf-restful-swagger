@@ -34,6 +34,12 @@ public class PlotlyData {
     private List<String> fields;
     private List<String> data;
 
+    public PlotlyData(String update, List<String> fields, List<String> data) {
+        this.update = update;
+        this.fields = fields;
+        this.data = data;
+    }
+
     public String getUpdate() {
         return update;
     }

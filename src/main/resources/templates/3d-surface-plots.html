@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- include css in the header -->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+    <script type="text/javascript" th:src="@{/js/plotly-latest.min.js}"></script>
+
+    <title>Plotly.toyhouse.cc</title>
+</head>
+<body>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="myDiv"></div>
+<script type="text/javascript">
+    //<![CDATA[
+    Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/api_docs/mt_bruno_elevation.csv', function(err, rows){
+        function unpack(rows, key) {
+            return rows.map(function(row) { return row[key]; });
+        }
+
+        var z_data=[ ]
+        for(i=0;i<24;i++)
+        {
+            z_data.push(unpack(rows,i));
+        }
+
+        var data = [{
+            z: z_data,
+            type: 'surface'
+        }];
+
+        var layout = {
+            title: 'Mt Bruno Elevation',
+            autosize: false,
+            width: 500,
+            height: 500,
+            margin: {
+                l: 65,
+                r: 50,
+                b: 65,
+                t: 90,
+            }
+        };
+        Plotly.newPlot('myDiv', data, layout);
+    });
+    //]]>
+</script>
+
+</body>
+</html>
