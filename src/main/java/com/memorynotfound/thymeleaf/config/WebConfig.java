@@ -1,4 +1,4 @@
-package com.memorynotfound.thymeleaf;
+package com.memorynotfound.thymeleaf.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
