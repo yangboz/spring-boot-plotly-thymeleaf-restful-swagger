@@ -33,11 +33,19 @@ public class PlotlyData {
     private String update;
     private List<String> fields;
     private List<String> data;
+    private String color = "";
+    private String title = "Mt Bruno Elevation";
 
-    public PlotlyData(String update, List<String> fields, List<String> data) {
+    public PlotlyData(String update, List<String> fields, List<String> data, String color, String title) {
         this.update = update;
         this.fields = fields;
         this.data = data;
+        this.color = color;
+        this.title = title;
+    }
+
+    public PlotlyData() {
+
     }
 
     public String getUpdate() {
@@ -64,12 +72,30 @@ public class PlotlyData {
         this.data = data;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "PlotlyData{" +
                 "update='" + update + '\'' +
                 ", fields=" + fields +
                 ", data=" + data +
+                ", color='" + color + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

@@ -42,13 +42,29 @@ public class PlotlyController {
         return plotlyExamples.get(index);
     }
 
+    //@see:https://plot.ly/javascript/colorscales/#custom-colorscale
+    private List<String> colorScales = new ArrayList<String>(
+            Arrays.asList("Blackbody","Electric","Earth", "Bluered"
+                    ,"YIOrRd","YIGnBu","RdBu","Portland","Picnic"
+                    ,"Jet","Hot","Greys","Greens"));
+
+
     @RequestMapping(value = "/plotly/{index}", method = GET)
     @ApiOperation(httpMethod = "GET", value = "Response a string describing plotly templates successfully created or not.", notes ="")
-    public ModelAndView plotlyListAll(@PathVariable int index,@RequestParam("dataUrl") String dataUrl) {
+    public ModelAndView plotlyListAll(@PathVariable int index
+            ,@RequestParam("dataUrl") String dataUrl
+            ,@RequestParam("title") String titleStr
+            ,@RequestParam("colorscale") int colorscaleIndex
+            ,@RequestParam("width") int width
+            ,@RequestParam("height") int height) {
 //        return plotlyExamples.get(index);
         // return a model and a view (just as an example)
         ModelAndView mv = new ModelAndView();
         mv.addObject("dataUrl", dataUrl);
+        mv.addObject("title", titleStr);
+        mv.addObject("colorscale", colorScales.get(colorscaleIndex));
+        mv.addObject("width", width);
+        mv.addObject("height", height);
         mv.setViewName(plotlyExamples.get(index));
         return mv;
     }

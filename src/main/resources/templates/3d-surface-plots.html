@@ -19,9 +19,13 @@
 <p th:text="${dataUrl}">Test</p>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    var address = /*[[${dataUrl}]]*/ null;
+    var dataUrl = /*[[${dataUrl}]]*/ null;
+    var titleStr = /*[[${title}]]*/ null;
+    var colorscaleStr = /*[[${colorscale}]]*/ null;
+    var widthVal = /*[[${width}]]*/ null;
+    var heightVal = /*[[${height}]]*/ null;
     // Plotly.d3.csv("/js/mt_bruno_elevation.csv", function(err, rows){
-    Plotly.d3.csv(address, function(err, rows){
+    Plotly.d3.csv(dataUrl, function(err, rows){
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
         }
@@ -34,14 +38,15 @@
 
         var data = [{
             z: z_data,
+            colorscale: colorscaleStr,
             type: 'surface'
         }];
 
         var layout = {
-            title: 'Mt Bruno Elevation',
+            title: titleStr,
             autosize: false,
-            width: 500,
-            height: 500,
+            width: widthVal,
+            height: heightVal,
             margin: {
                 l: 65,
                 r: 50,
